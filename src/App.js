@@ -23,24 +23,34 @@ const showAlert=(message,type)=>{
   })
   setTimeout(() => {
     setAlert(null);
-  }, 2000);
+  }, 3000);
+
+}
+const removeClasses=()=>{
+
+document.body.classList.remove('bg-light');
+document.body.classList.remove('bg-success');
+document.body.classList.remove('bg-danger');
+document.body.classList.remove('bg-warning');
+document.body.classList.remove('bg-primary');
 
 }
 
-
-  const toggleMode=()=>{
+  const toggleMode=(cls)=>{
+    removeClasses();
+    document.body.classList.add('bg-'+cls)
     if(mode==='light')
     {
       setMode('dark');
       document.body.style.backgroundColor='#03062e';
       showAlert("Dark Mode enabled",'success');
-      document.title='TextUtils - Dark Mode';
+      // document.title='TextUtils - Dark Mode';
   }
     else{
     setMode('light');
     document.body.style.backgroundColor='white';
     showAlert("Light Mode enabled",'success');
-    document.title='TextUtils - Home';
+    // document.title='TextUtils - Home';
   }
   }
   return (
@@ -51,10 +61,11 @@ const showAlert=(message,type)=>{
   
   <div className="container my-3">
   <Routes>
-          <Route exact path="/about" element={<About/>}/>
+          <Route exact path="/about" element={<About mode={mode}/>}/>
           <Route exact path="/" element={<Form heading= "Enter Text to Analyse" mode={mode} showAlert={showAlert}/>}/>
            
         </Routes>
+        {/* <Form heading= "Enter Text to Analyse" mode={mode} showAlert={showAlert}/> */}
   </div>
   </Router>
   </>
